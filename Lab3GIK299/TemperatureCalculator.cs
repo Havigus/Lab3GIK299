@@ -4,45 +4,56 @@ public class TemperatureCalculator
 {
     
     private readonly Random _random = new Random();   
-    private double[] _temperatures; 
+    private readonly double[] _temperatures; 
     
     public TemperatureCalculator()
     {
-        _temperatures = new Double[31];
+        _temperatures = new double[31];
         for (int i = 0; i < _temperatures.Length; i++)
         {
             _temperatures[i] = 8.0 + _random.NextDouble() * (20.0 - 8.0);
         }
     }
 
-    public void TempratureEachDay()
+    public void DisplayTempratureForEachDay()
     {
+        Console.WriteLine("The temperature each day in May was:");
+        Console.WriteLine("+----------------------+");
+        Console.WriteLine("|Date    | Temperature |");
+        Console.WriteLine("+----------------------+");
         for (int i = 0; i < _temperatures.Length; i++)
         {
-            Console.WriteLine($"The temprature for May {i +1} was {_temperatures[i]:F1} \u00B0C");
+            Console.WriteLine($"|May {i +1,2}  | {_temperatures[i],5:F1} \u00B0C    |");
+            Console.WriteLine("+----------------------+");
+            //Console.WriteLine($"The temprature for May {i +1} was {_temperatures[i]:F1} \u00B0C");
         }
     }
 
-    public void AverageTemperature()
+    public void FindAverageTemperature()
     {
         double average = _temperatures.Average();
-
-        Console.WriteLine($"The average temperature in May was {average:F1} \u00B0C");
+        Console.WriteLine("+------------------------------------------+");
+        Console.WriteLine($"|The average temperature in May was {average:F1} \u00B0C|");
+        Console.WriteLine("+------------------------------------------+");
     }
 
-    public void MaxTemperature()
+    public void FindMaxTemperature()
     {
         double max = _temperatures.Max();
-        Console.WriteLine($"The max temperature in May was {max:F1} \u00B0C");
+        int maxIndex = Array.IndexOf(_temperatures, max);
+        Console.WriteLine($"The highest temperature in May was: ");
+        Console.WriteLine($"May {maxIndex} and the temperature was {max:F1} \u00B0C");
     }
 
-    public void MinTemperature()
+    public void FindMinTemperature()
     {
         double min = _temperatures.Min();
-        Console.WriteLine($"The min temperature in May was {min:F1} \u00B0C");
+        int minIndex = Array.IndexOf(_temperatures, min);
+        Console.WriteLine($"The lowest temperature in May was: ");
+        Console.WriteLine($"May {minIndex} and the temperature was {min:F1} \u00B0C");
     }
 
-    public void MedianTemperature()
+    public void DisplayMedianTemperature()
     {
         int length = _temperatures.Length;
         if (length % 2 != 0)
@@ -102,7 +113,7 @@ public class TemperatureCalculator
         Console.WriteLine($"The day after the temperature was {_temperatures[arg]:F1} \u00B0C");
     }
 
-    public void MostCommonTemperature()
+    public void FindMostCommonTemperature()
     {
         double[] copyArray = new double[_temperatures.Length];
         Array.Copy(_temperatures, copyArray, _temperatures.Length);

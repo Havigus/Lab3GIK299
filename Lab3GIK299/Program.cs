@@ -34,19 +34,19 @@ class Program
             switch (userMenuInput)
             {
                 case "1":
-                    temperatureCalculator.TempratureEachDay();
+                    temperatureCalculator.DisplayTempratureForEachDay();
                     break;
                 case "2":
-                    temperatureCalculator.AverageTemperature();
+                    temperatureCalculator.FindAverageTemperature();
                     break;
                 case "3":
-                    temperatureCalculator.MaxTemperature();
+                    temperatureCalculator.FindMaxTemperature();
                     break;
                 case "4":
-                    temperatureCalculator.MinTemperature();
+                    temperatureCalculator.FindMinTemperature();
                     break;
                 case "5":
-                    temperatureCalculator.MedianTemperature();
+                    temperatureCalculator.DisplayMedianTemperature();
                     break;
                 case "6":
                     bool keepRunning6 = true;
@@ -61,7 +61,6 @@ class Program
                         }
                         
                     }
-
                     break;
                 case "7":
                     Console.WriteLine("What threshold do you want to set?");
@@ -74,15 +73,29 @@ class Program
                     temperatureCalculator.FilterTempreratureBySearch(userDayNumberInput);
                     break;
                 case "9":
-                    temperatureCalculator.MostCommonTemperature();
+                    temperatureCalculator.FindMostCommonTemperature();
                     break;
                 case "h":
                     SuperSecretFunction();
+                    break;
+                default:
+                    Console.WriteLine("!!!Please enter a valid option!!!");
+                    Thread.Sleep(2000);
                     break;
                     
                     
                     
             }
+
+            Console.WriteLine();
+            Console.WriteLine("Do you want to exit the program? (Y/N) ");
+            string userInputContinue = Console.ReadKey().KeyChar.ToString().ToUpper();
+            if (userInputContinue == "Y")
+            {
+                keepRunning = false;
+            }
+            
+            
         }
         
         

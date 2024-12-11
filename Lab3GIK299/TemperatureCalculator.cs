@@ -5,7 +5,7 @@ public class TemperatureCalculator
     // A Random instance to generate random temperatures.
     private readonly Random _random = new Random();   
 
-    // Array to hold temperatures for 31 days.
+    // Array to hold temperatures.
     private readonly double[] _temperatures; 
     
     // Constructor initializes the array with random temperatures between 8.0 and 20.0.
@@ -18,7 +18,7 @@ public class TemperatureCalculator
         }
     }
 
-    // Method to display temperatures for each day of May in a table format.
+    // Method to display temperatures for each day of May.
     public void DisplayTempratureForEachDay()
     {
         Console.WriteLine("The temperature each day in May was:");
@@ -133,6 +133,7 @@ public class TemperatureCalculator
         }
     }
 
+    //Method to find the most common temperature. 
     public void FindMostCommonTemperature()
     {
         double[] copyArray = new double[_temperatures.Length];

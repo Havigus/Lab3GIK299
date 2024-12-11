@@ -68,7 +68,7 @@ class Program
                     temperatureCalculator.FilterTemperatureThreshold(userThresholdInput);
                     break;
                 case "8":
-                    Console.WriteLine("What day of the month do you want to see? Enter a number.");
+                    Console.WriteLine("Which day of the month do you want to see? Enter a number.");
                     int userDayNumberInput = Convert.ToInt32(Console.ReadLine());
                     temperatureCalculator.FilterTempreratureBySearch(userDayNumberInput);
                     break;
@@ -114,7 +114,7 @@ class Program
         }
         catch (Exception e)
         {
-            Console.WriteLine("Sorry, i couldn't help you.");
+            Console.WriteLine("Sorry, I couldn't help you.");
         }
     }
 }

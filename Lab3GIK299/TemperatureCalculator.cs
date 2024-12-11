@@ -109,7 +109,7 @@ public class TemperatureCalculator
     public void FilterTempreratureBySearch(int arg)
     {
         Console.WriteLine($"The temperature May {arg} was {_temperatures[arg -1]:F1}");
-        Console.WriteLine($"The day befor the temperature was {_temperatures[arg -2]:F1} \u00B0C");
+        Console.WriteLine($"The day before the temperature was {_temperatures[arg -2]:F1} \u00B0C");
         Console.WriteLine($"The day after the temperature was {_temperatures[arg]:F1} \u00B0C");
     }
 

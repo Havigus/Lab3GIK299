@@ -62,19 +62,23 @@ public class TemperatureCalculator
     // Method to display the median temperature of May.
     public void DisplayMedianTemperature()
     {
+        //NEW! copy and sort the array to get the right median by temp
+        double[] copyArray = new double[_temperatures.Length];
+        Array.Copy(_temperatures, copyArray, _temperatures.Length);
+        Array.Sort(copyArray);
         int length = _temperatures.Length;
         if (length % 2 != 0)
         {
             // Odd number of elements: median is the middle value.
             int medianIndex = length / 2;
-            Console.WriteLine($"The median temperature in May was {_temperatures[medianIndex]:F1} \u00B0C");
+            Console.WriteLine($"The median temperature in May was {copyArray[medianIndex]:F1} \u00B0C");
         }
         else
         {
             // Even number of elements: median is the average of the two middle values.
             int medianIndex1 = length / 2 - 1;
             int medianIndex2 = length / 2;
-            double averageMedian = (_temperatures[medianIndex1] + _temperatures[medianIndex2]) / 2;
+            double averageMedian = (copyArray[medianIndex1] + copyArray[medianIndex2]) / 2;
             Console.WriteLine($"The median temperature in May was {averageMedian:F1} \u00B0C");
         }
     }
@@ -133,20 +137,78 @@ public class TemperatureCalculator
         }
     }
 
-    //Method to find the most common temperature. 
+    
+    //NEW! method to find the most common temperature in May
+    //https://www.reddit.com/r/godot/comments/18anaxc/how_to_check_an_array_for_the_most_common_element/
     public void FindMostCommonTemperature()
+    {
+        //copys the array in to an new array
+        double[] copyArray = new double[_temperatures.Length];
+        Array.Copy(_temperatures, copyArray, _temperatures.Length);
+
+        //loops through the array and rounds each element to 1 decimal for it to work
+        for (int i = 0; i < _temperatures.Length; i++)
+        {
+            copyArray[i] = Math.Round(_temperatures[i], 1);
+        }
+        
+        //create a new dict to keep track of counts where temp is key and count is value
+        var counts = new Dictionary<double, int>();
+        foreach (var temp in copyArray)
+        {
+            //if temp not in dict add it to dict 
+            if(!counts.ContainsKey(temp))
+                counts[temp] = 0;
+            //else add to the count
+            counts[temp]++;
+        }
+        
+        //gets the highest count from the dict value
+        var maxCount = counts.Values.Max();
+        
+        //filters the dict to only keys with the value is maxCount
+        //then select the keys, order them and adds the to the list 
+        var mostCommon = counts
+            .Where(x => x.Value == maxCount)
+            .Select(x => x.Key)
+            .OrderBy(x => x)
+            .ToList();
+        
+        //if only one temp is most common
+        if (mostCommon.Count == 1)
+        {
+            Console.WriteLine($"The most common temperature in May was {mostCommon[0]:F1} \u00B0C. And occurred {maxCount} times.");
+        }
+        //if there are several temps 
+        else
+        {
+            Console.WriteLine("The most common temperature in May were:");
+            //loops through the list and prints them out
+            foreach (var temp in mostCommon)
+            {
+                Console.WriteLine($" {temp:F1} \u00B0C");
+            }
+
+            Console.WriteLine($"And they occurred {maxCount} times each.");
+        }
+    }
+    
+    //OLD METHOD
+    //Method to find the most common temperature. 
+   /* public void FindMostCommonTemperature()
     {
         double[] copyArray = new double[_temperatures.Length];
         Array.Copy(_temperatures, copyArray, _temperatures.Length);
         //Inspired from StackOverflow, using LINQ to group the array by its values
         //then order the groups by the count of occurrences
         //then gets the first group, which will be the group with most occurrences
-        double mode = copyArray.GroupBy(v => v)
+        double mode = copyArray
+            .GroupBy(v => v)
             .OrderByDescending(g => g.Count())
             .First()
             .Key;
         Console.WriteLine($"The most common temperature in May was {mode:F1} \u00B0C");
-    }
+    }*/
 }
 
     
